@@ -7,15 +7,20 @@ use External\Foo\Exceptions\AuthenticationFailedException;
 
 class FooAuthStrategy implements AuthStrategyInterface
 {
+    protected AuthWS $authService;
+
+    public function __construct(AuthWS $authService)
+    {
+        $this->authService = $authService;
+    }
+
     public function authenticate(string $login, string $password): bool
     {
-        $service = new AuthWS();
-
         try {
-            $service->authenticate($login, $password);
-            return true; // Authentication succeeded
+            $this->authService->authenticate($login, $password);
+            return true;
         } catch (AuthenticationFailedException $e) {
-            return false; // Authentication failed
+            return false;
         }
     }
 }

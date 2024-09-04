@@ -16,7 +16,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', 'App\Http\Controllers\AuthController@login');
 Route::get('titles', 'App\Http\Controllers\MovieController@getTitles');
-
-Route::get('test-api', function () {
-    return response()->json(['message' => 'API is working!'], 200);
-});

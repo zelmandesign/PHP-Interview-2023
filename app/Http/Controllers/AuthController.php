@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\AuthService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AuthController extends Controller
@@ -17,6 +18,18 @@ class AuthController extends Controller
 
     public function login(Request $request): JsonResponse
     {
+        $validator = Validator::make($request->all(), [
+            'login' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'failure',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
         $login = $request->input('login');
         $password = $request->input('password');
 
@@ -26,6 +39,6 @@ class AuthController extends Controller
             return response()->json(['status' => 'success', 'token' => $token]);
         }
 
-        return response()->json(['status' => 'failure']);
+        return response()->json(['status' => 'failure'], 401);
     }
 }

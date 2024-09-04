@@ -7,10 +7,16 @@ use External\Baz\Auth\Responses\Success;
 
 class BazAuthStrategy implements AuthStrategyInterface
 {
+    protected Authenticator $authenticator;
+
+    public function __construct(Authenticator $authenticator)
+    {
+        $this->authenticator = $authenticator;
+    }
+
     public function authenticate(string $login, string $password): bool
     {
-        $service = new Authenticator();
-        $response = $service->auth($login, $password);
+        $response = $this->authenticator->auth($login, $password);
         return $response instanceof Success;
     }
 }
