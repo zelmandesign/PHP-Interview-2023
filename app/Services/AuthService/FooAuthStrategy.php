@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\AuthService;
 
 use External\Foo\Auth\AuthWS;
 use External\Foo\Exceptions\AuthenticationFailedException;
@@ -22,5 +22,10 @@ class FooAuthStrategy implements AuthStrategyInterface
         } catch (AuthenticationFailedException $e) {
             return false;
         }
+    }
+
+    public function getContext(): string
+    {
+        return 'FOO';
     }
 }

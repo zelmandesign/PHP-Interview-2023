@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\AuthService;
 
 use External\Bar\Auth\LoginService;
 
@@ -16,5 +16,10 @@ class BarAuthStrategy implements AuthStrategyInterface
     public function authenticate(string $login, string $password): bool
     {
         return $this->loginService->login($login, $password);
+    }
+
+    public function getContext(): string
+    {
+        return 'BAR';
     }
 }

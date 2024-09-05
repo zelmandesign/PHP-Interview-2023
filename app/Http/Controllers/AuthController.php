@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\AuthService;
+use App\Services\AuthService\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\JsonResponse;

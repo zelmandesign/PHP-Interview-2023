@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\AuthService;
 
 use Firebase\JWT\JWT;
 
@@ -24,11 +24,12 @@ class AuthService
         $authenticated = $strategy->authenticate($login, $password);
 
         if ($authenticated) {
-            return $this->generateJwtToken($login, $this->strategyFactory->getPrefix($login));
+            return $this->generateJwtToken($login, $strategy->getContext());
         }
 
         return null;
     }
+
 
     private function generateJwtToken(string $login, string $context): string
     {

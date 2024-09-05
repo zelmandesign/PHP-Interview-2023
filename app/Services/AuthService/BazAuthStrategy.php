@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\AuthService;
 
 use External\Baz\Auth\Authenticator;
 use External\Baz\Auth\Responses\Success;
@@ -18,5 +18,10 @@ class BazAuthStrategy implements AuthStrategyInterface
     {
         $response = $this->authenticator->auth($login, $password);
         return $response instanceof Success;
+    }
+
+    public function getContext(): string
+    {
+        return 'BAZ';
     }
 }
